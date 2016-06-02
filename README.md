@@ -1,4 +1,4 @@
-# Component based project Skelton using angular and typescript
+# Component based project skelton using angular and typescript
 Base framework for developing applications with angular component and type script.
 
 ## To Run
