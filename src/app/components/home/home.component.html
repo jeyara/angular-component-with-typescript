@@ -1,20 +1,20 @@
 <div class="row">
-    <div class="jumbotron vertical-center" ng-show="$ctrl.askCode">
+    <div class="jumbotron vertical-center">
         <div class="container">
-            <div class="col-lg-3">
+            <div class="col-lg-2">
             </div>
-            <div class="col-lg-6">
-                <p>{{ $ctrl.message }}</p>
-                <div class="input-group">
-                    <input type="text" class="form-control" ng-model="$ctrl.codeWord" ng-keypress="$ctrl.checkIfEnterKeyWasPressed($event)" placeholder="please enter the magic sentence...">
-                    <span class="input-group-btn">
-                        <button class="btn btn-default" type="button" ng-click="$ctrl.checkCodeWord()">Go!</button>
-                    </span>
-                </div><!-- /input-group -->
+            <div class="col-lg-8">
+                        <button class="btn btn-primary" type="button" ng-click="$ctrl.showProgress()">Show InProgress</button>
+                        <button class="btn btn-primary" type="button" ng-click="$ctrl.hideProgress()">Hide InProgress</button>
+                        <button class="btn btn-warning" type="button" ng-click="$ctrl.showWarning()">Show Alert</button>
+                        <button class="btn btn-success" type="button" ng-click="$ctrl.showSuccess()">Show Alert</button>
+                        <button class="btn btn-danger" type="button" ng-click="$ctrl.showDanger()">Show Alert</button>
             </div><!-- /.col-lg-6 -->
-            <div class="col-lg-3">
+            <div class="col-lg-2">
             </div>
         </div>
     </div>
 </div><!-- /.row -->
-
+<div class="row" ng-hide="$ctrl.askCode">
+    <nvd3 ng-hide="$ctrl.askCode" options="$ctrl.options" data="$ctrl.data"></nvd3>
+</div><!-- /.row -->

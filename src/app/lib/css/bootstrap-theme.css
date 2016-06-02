@@ -601,3 +601,47 @@ fieldset[disabled] .btn-danger.active {
   color: #ed1c24;
 }
 /*# sourceMappingURL=bootstrap-theme.css.map */
+
+#progress .progress { 
+  height: 0.5em;
+}
+
+#progress .progress-bar { 
+  transition: width 1s ease-in-out; 
+}
+
+#progress .progress-striped {
+ z-index:3000;
+ position:fixed;
+ top:0;
+ right:0;
+ left:0;
+}
+
+#message {
+position: fixed;
+    top: 60px;
+    right: 1%;
+    width: 250px;
+    z-index:5000;
+}
+#message .alert {
+    margin: 5px auto;
+    -webkit-box-shadow: 0px 0px 35px -6px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 0px 35px -6px rgba(0,0,0,0.75);
+    box-shadow: 0px 0px 35px -6px rgba(0,0,0,0.75);
+    opacity: 0.8;
+    filter: alpha(opacity=80); /* For IE8 and earlier */
+    padding:10px;
+}
+
+#message .close{
+    right:0px;
+}
+
+
+.container .jumbotron, .container-fluid .jumbotron
+{
+margin-top: 60px;
+  
+}

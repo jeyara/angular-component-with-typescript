@@ -1,0 +1,10 @@
+﻿
+<div id="progress">
+    <uib-progressbar class="progress-striped active" type="danger" ng-show="$ctrl.showProgressBar" max="100" value="100"></uib-progressbar>
+    <!--<uib-progressbar class="progress-striped active" type="primary" max="100" value="100"></uib-progressbar>-->
+</div>
+
+
+    <div id="message">
+        <uib-alert class="inner-message"dismiss-on-timeout="3000" ng-repeat="alert in $ctrl.alerts" type="{{alert.type}}" close="$ctrl.closeAlert($index)">{{alert.msg}}</uib-alert>
+    </div>

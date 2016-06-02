@@ -1,96 +1,62 @@
+import { appConfig } from "./../../app.value";
+import { Message } from "./../../models/message.model";
+import { Alert } from "./../../models/alert.model";
+import { displaytype } from "./../../models/displaytype.model";
 import { ISharedService } from "./../../services/shared.service";
 import { IGraphService } from "./../../services/graph.service";
 import { IConfigData } from "./../../models/configdata.model";
 import { IPublicGraph } from "./../../models/publicgraph.model";
-import "wwwroot/js/bootstrap";
+import "/app/lib/js/ui-bootstrap-tpls-1.3.2";
 
 //declare var nv;
 class HomeComponentController {
-    message: string;
-    codeWord: string;
-    askCode: boolean;
-    options: any;
-    daysToLoad: number;
-    data: IPublicGraph[];
-    xAxisData: string[];
-    activePromise: ng.IPromise<any>;
 
-    static $inject: Array<string> = ["$log", "sharedService", "graphService" ];
+    static $inject: Array<string> = ["$log", "$rootScope", "sharedService", "graphService", "appConfig"];
     constructor(
         private $log: ng.ILogService,
+        private $rootScope: ng.IRootScopeService,
         private sharedService: ISharedService,
-        private graphService: IGraphService
-    ) {
+        private graphService: IGraphService,
+        private appConfig: any
+   ) {
     }
     
     $onInit() {
-        this.daysToLoad = 30;
-        this.$log.info("In component initialization lifecycle hook...");
-        this.askCode = true;
-        this.xAxisData = [];
-        this.loadConfig();
+
+      this.$log.info("In component initialization lifecycle hook...");
+    }    
+    
+    showProgress(): void
+    {
+        let msg = new Message(appConfig.componentNames.uxComponent, appConfig.componentNames.homeComponent, true);
+        this.$rootScope.$broadcast(appConfig.eventNames.progressStatusEvent, msg);
     }
-
-    loadGraph(): void {
-
-        var key = this.sharedService.getLocalStorage("x-key");
-        var value = this.sharedService.getLocalStorage("x-value");
-
-        this.activePromise = this.graphService
-            .getPublicGraph(this.daysToLoad, key, value)
-            .then((data: IPublicGraph[]) => {
-                this.data = data;
-                this.data.forEach(t => {
-                    t.values.forEach(v => {
-                        v[0] = v[0];
-                        v[1] = Number[1];
-                        this.xAxisData.push(v[0]);
-                    })
-                });
-            })
-            .catch(err => {
-                alert(err);
-            });
+    
+    hideProgress(): void
+    {
+        let msg = new Message(appConfig.componentNames.uxComponent, appConfig.componentNames.homeComponent, false);
+        this.$rootScope.$broadcast(appConfig.eventNames.progressStatusEvent, msg);
     }
-
-    loadConfig(): void {
-        let self = this;
-
-        var check = this.sharedService.getLocalStorage("x-auth");
-        if (check == "true")
-        {
-            self.askCode = false;
-            this.loadGraph();
-        }
+    
+    showWarning(index): void
+    {
+            let alert = new Alert("This is a warning message !!", displaytype.warning);
+            let msg = new Message(appConfig.componentNames.uxComponent, appConfig.componentNames.homeComponent, alert);
+            this.$rootScope.$broadcast(appConfig.eventNames.displayUserMessageEvent, msg);
     }
-
-    checkIfEnterKeyWasPressed($event): void {
-        var keyCode = $event.which || $event.keyCode;
-        if (keyCode === 13) {
-            this.checkCodeWord();
-            event.preventDefault();
-        }
+    
+    showSuccess(index): void
+    {
+             let alert = new Alert("This is a success message !!", displaytype.success);
+            let msg = new Message(appConfig.componentNames.uxComponent, appConfig.componentNames.homeComponent, alert);
+            this.$rootScope.$broadcast(appConfig.eventNames.displayUserMessageEvent, msg);
     }
-
-    checkCodeWord(): void {
-
-        this.activePromise = this.sharedService
-            .checkPublicCodeWord(this.codeWord)
-            .then((data: IConfigData) => {
-                if (data.APIKeyValue !== null && data.APIKeyValue.length > 0) {
-                    this.askCode = false;
-                    this.sharedService.setLocalStorage("x-auth", "true");
-                    this.sharedService.setLocalStorage("x-key", data.APIKeyName);
-                    this.sharedService.setLocalStorage("x-value", data.APIKeyValue);
-                    this.loadGraph();
-                }
-                else {
-                    this.message = "Magic Sentence is incorrect !!!"
-                }
-            })
-            .catch(err => {
-                //alert(err);
-            });
+    
+    showDanger(index): void
+    {
+            let alert = new Alert("This is a error message !!!", displaytype.danger);
+           let msg = new Message(appConfig.componentNames.uxComponent, appConfig.componentNames.homeComponent, alert);
+            this.$rootScope.$broadcast(appConfig.eventNames.displayUserMessageEvent, msg);
     }
 }
 

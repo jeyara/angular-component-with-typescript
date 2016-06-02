@@ -3,9 +3,6 @@
   "ambientDependencies": {
     "angular": "registry:dt/angular#1.5.0+20160509150441",
     "angular-ui-bootstrap": "registry:dt/angular-ui-bootstrap#0.13.3+20160501125848",
-    "angular-ui-router": "registry:dt/angular-ui-router#1.1.5+20160412134757",
-    "d3": "registry:dt/d3#0.0.0+20160514171929",
-    "jquery": "registry:dt/jquery#1.10.0+20160417213236",
-    "nvd3": "registry:dt/nvd3#1.8.1+20160317120654"
+     "jquery": "registry:dt/jquery#1.10.0+20160417213236"
   }
 }

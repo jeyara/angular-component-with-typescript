@@ -12,7 +12,6 @@
     "typings/browser",
     "typings/browser.d.ts",
     "typings/main",
-    "typings/main.d.ts",
-    "wwwroot"
+    "typings/main.d.ts"
   ]
 }

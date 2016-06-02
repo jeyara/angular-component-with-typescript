@@ -1,0 +1,21 @@
+#JSPM
+/src/jspm_packages
+
+#NPM
+/src/node_modules
+
+#Typings
+/src/typings
+
+#JS Files in Some path
+/src/app/components/**/*.js
+/src/app/components/**/*.map
+
+/src/app/models/**/*.js
+/src/app/models/**/*.map
+
+/src/app/services/**/*.js
+/src/app/services/**/*.map
+
+/src/app/*.js
+/src/app/*.map
